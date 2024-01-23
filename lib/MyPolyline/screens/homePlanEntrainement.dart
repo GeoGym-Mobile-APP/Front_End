@@ -38,13 +38,13 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                 leading: Padding(
                   padding: const EdgeInsets.only(left: 20, top: 10),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
                     child: Center(
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios,
+                        icon: const Icon(Icons.arrow_back_ios,
                             color: Colors.black, size: 30),
                         onPressed: () {
                           Navigator.pop(context);
@@ -53,8 +53,8 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                     ),
                   ),
                 ),
-                title: Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
+                title: const Padding(
+                  padding:  EdgeInsets.only(top: 10.0),
                   child: Text(
                     'Plan Entrainement',
                     style: TextStyle(
@@ -68,7 +68,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                 backgroundColor: Colors.black,
                 elevation:
                     0, // Supprimez l'ombre de la AppBar si vous le souhaitez
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0),
@@ -83,21 +83,21 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
               future: _trainingPlansFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(
+                  return const Center(
                       child: Text(
                           'Erreur de chargement des plans d\'entraînement'));
                 } else if (!snapshot.hasData ||
                     (snapshot.data as List<TrainingPlan>).isEmpty) {
-                  return Center(
+                  return const Center(
                       child: Text('Aucun plan d\'entraînement disponible'));
                 } else {
                   List<TrainingPlan> trainingPlans =
                       snapshot.data as List<TrainingPlan>;
 
                   return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 4.0,
                       mainAxisSpacing: 8.0,
@@ -112,7 +112,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
                           child: ListTile(
                             title: Center(
                               child: Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Colors.blue, // Couleur du cercle
                                 ),

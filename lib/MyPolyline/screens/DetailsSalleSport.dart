@@ -24,7 +24,7 @@ class DetailsSalleSport extends StatelessWidget {
 
 
   ) async {
-    final endpoint = "https://b420-105-159-253-48.ngrok-free.app/alternative-paths/-7.390107344006293,33.679689304958444/-7.3827094599591785,33.68313341250354";
+    final endpoint = "https://afe5-41-250-28-38.ngrok-free.app/alternative-paths/-7.390107344006293,33.679689304958444/-7.3827094599591785,33.68313341250354";
    
     final response = await http.get(Uri.parse(endpoint));
  
@@ -141,6 +141,26 @@ class DetailsSalleSport extends StatelessWidget {
                           color: Colors.white,
                           fontSize: 24.0,
                           fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    Container(
+                      width: largeurEcran * 0.88,
+                      margin: EdgeInsets.only(top: 20.0),
+                      padding: EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          salleDeSport.typeActivite,
+                          style: const TextStyle(
+                            color: Colors.orange,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
