@@ -28,7 +28,7 @@ class _MapScreenState extends State<MapScreen> {
   Future<void> _loadMarkers() async {
     try {
       sallesDeSport = await ApiSalleSport(
-              baseUrl: 'https://afe5-41-250-28-38.ngrok-free.app')
+              baseUrl: 'https://e4d9-105-159-141-163.ngrok-free.app')
           .getAllSallesSport();
 
       for (SalleDeSport salle in sallesDeSport) {

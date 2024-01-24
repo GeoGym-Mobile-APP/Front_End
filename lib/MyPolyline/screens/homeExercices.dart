@@ -19,7 +19,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
   @override
   void initState() {
     super.initState();
-    _exercisesFuture = ExerciseApi('https://afe5-41-250-28-38.ngrok-free.app')
+    _exercisesFuture = ExerciseApi('https://e4d9-105-159-141-163.ngrok-free.app')
         .getExercisesByPlanId(widget.trainingPlanId);
   }
 
@@ -112,7 +112,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                             children: [
                               FutureBuilder(
                                 future: MovementApi(
-                                        'https://afe5-41-250-28-38.ngrok-free.app')
+                                        'https://e4d9-105-159-141-163.ngrok-free.app')
                                     .getMovementsByExerciseId(
                                         exercises[index].id.toString()),
                                 builder: (context, snapshot) {
@@ -156,7 +156,7 @@ class _ExercisesScreenState extends State<ExercisesScreen> {
                                                           fontSize: 25),
                                                     ),
                                                     content: Image.network(
-                                                      'URL_de_votre_image',
+                                                      movements[index].image,
                                                       width: 200,
                                                       height: 200,
                                                       fit: BoxFit.cover,

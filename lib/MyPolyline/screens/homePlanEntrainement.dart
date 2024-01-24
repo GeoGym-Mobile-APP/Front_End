@@ -19,7 +19,7 @@ class _TrainingPlansScreenState extends State<TrainingPlansScreen> {
   void initState() {
     super.initState();
     _trainingPlansFuture =
-        TrainingPlanApi('https://afe5-41-250-28-38.ngrok-free.app')
+        TrainingPlanApi('https://e4d9-105-159-141-163.ngrok-free.app')
             .getTrainingPlansByObjectiveId(widget.objectiveId);
   }
 

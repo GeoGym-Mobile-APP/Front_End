@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:map_events_project/MyPolyline/screens/ScreenPath.dart';
 import '../model/eventSport.dart';
+import 'package:geolocator/geolocator.dart';
+
+import 'package:http/http.dart' as http;
+
 
 class EventDetails extends StatefulWidget {
   final EventModel event;
@@ -32,7 +39,64 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   Widget build(BuildContext context) {
     double largeurEcran = MediaQuery.of(context).size.width;
+    void _getRoute(
+    double startLatitude,
+    double startLongitude,
+    double endLatitude,
+    double endLongitude,
 
+
+  ) async {
+    final endpoint = "https://e4d9-105-159-141-163.ngrok-free.app/alternative-paths/-7.390107344006293,33.679689304958444/-7.3827094599591785,33.68313341250354";
+   
+    final response = await http.get(Uri.parse(endpoint));
+ 
+    if (response.statusCode == 200) {
+      // Si la requête est réussie, analysez le JSON pour obtenir les points du chemin
+      List<dynamic> jsonResponse = json.decode(response.body);
+      List<Map<String, dynamic>> path = jsonResponse.map((point) {
+        return {
+          "lat": point["lat"],
+          "lon": point["lon"],
+        };
+      }).toList();
+
+      print(" cc $path");
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ScreenPath(pathPoints: path),
+        ),
+      );
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+    }
+  }
+
+    Future<Position> getUserLocation() async {
+      await Geolocator.requestPermission()
+          .then((value) {})
+          .onError((error, stackTrace) => null);
+      return await Geolocator.getCurrentPosition();
+    }
+
+    void _getMyLocation() async {
+      Position currentPosition = await getUserLocation();
+      print('My location: ${currentPosition.latitude} ${currentPosition.longitude}');
+
+      // Coordonnées de la salle de sport
+      double EventLatitude = widget.event.lapt;
+      double EventLongitude = widget.event.longt;
+
+      // Appel à la fonction pour récupérer le chemin
+      _getRoute(
+        currentPosition.latitude,
+        currentPosition.longitude,
+        EventLatitude,
+        EventLongitude,
+      );
+    }
     return Scaffold(
       body: Stack(
         children: [
@@ -306,7 +370,9 @@ class _EventDetailsState extends State<EventDetails> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          _getMyLocation();
+        },
         backgroundColor: Colors.white,
         icon: const Icon(
           Icons.directions,

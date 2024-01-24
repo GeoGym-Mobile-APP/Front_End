@@ -8,6 +8,8 @@ class EventModel {
   final DateTime startDate;
   final String startTime;
   final String endTime;
+  final double longt;
+  final double lapt;
 
   // Extracting the day from the startDate
   final String day;
@@ -20,6 +22,8 @@ class EventModel {
     required this.startDate,
     required this.startTime,
     required this.endTime,
+    required this.longt,
+    required this.lapt,
 
   }) : day = _getFormattedDay(startDate);
 
@@ -32,6 +36,8 @@ class EventModel {
       startDate: DateTime.parse(json['startDate']),
       startTime: json['startTime'],
       endTime: json['endTime'],
+      longt: json['longt'] as double,
+      lapt: json['lapt'] as double,
     );
   }
   @override
